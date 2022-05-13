@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Card, Col, Container, Nav, Row, Table } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import ReactTooltip from "react-tooltip";
 import Header from "../includes/Header";
 
 export default function Dashboard() {
@@ -24,6 +25,13 @@ export default function Dashboard() {
 
   return (
     <>
+      <ReactTooltip
+        place="right"
+        type="light"
+        effect="solid"
+        className="shadow-sm"
+      ></ReactTooltip>
+
       <Toaster position="bottom-center" duration="4000" />
 
       <Header />
@@ -46,13 +54,13 @@ export default function Dashboard() {
                 </div>
                 <div className="navs">
                   <Nav>
-                    <Nav.Link>
+                    <Nav.Link data-tip="Dashboard">
                       <FontAwesomeIcon icon="fa-solid fa-table-cells-large" />
                     </Nav.Link>
-                    <Nav.Link>
+                    <Nav.Link data-tip="Employees">
                       <FontAwesomeIcon icon="fa-solid fa-users" />
                     </Nav.Link>
-                    <Nav.Link>
+                    <Nav.Link data-tip="Mails">
                       <FontAwesomeIcon icon="fa-solid fa-envelope" />
                     </Nav.Link>
                     <Nav.Link>
@@ -62,7 +70,7 @@ export default function Dashboard() {
                       <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
                     </Nav.Link>
 
-                    <Nav.Link>
+                    <Nav.Link data-tip="Settings" className="mt-auto">
                       <FontAwesomeIcon icon="fa-solid fa-gear" />
                     </Nav.Link>
                   </Nav>
