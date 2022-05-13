@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (!badResponseCodeExceptions.includes(error.response.status)) {
-      toast.error("Something went wrong");
+      toast.error(error.response.statusText);
     }
     return Promise.reject(error);
   }

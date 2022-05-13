@@ -1,17 +1,17 @@
 // background colors variables
 // $bg-color: #f2fff8;
 // $bg-color: #efefef;
-$bg-color: #faffff;
+$bg-color: #f6f6f9;
 $bg-color-secondary: #eaf2ff;
 $bg-color-light: #ffffff;
 
 //accent color variables
-$accent-color: #d6fdee;
+$accent-color: #f0f0fe;
 
 // text colors variables
 $text-color: rgba(0, 0, 0, 0.6);
 $text-hover-color: rgba(0, 0, 0, 0.8);
-$link-color: #28c2aa;
+$link-color: #8973f2;
 
 // shadow variables
 $filter-color: drop-shadow(0px 10px 11.5px rgba(196, 200, 208, 0.4));
@@ -20,11 +20,12 @@ $shodow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 // border-radius
 $border-color: #d7d7d7;
 $border-hovre-color: #a2a2a2;
-$border-radius: 10px;
+$border-radius: 8px;
 
 // button color
-$button-color: #28c2aa;
-$button-hover-color: #31af9c;
+$button-color: #8973f2;
+$button-hover-color: #6f56ed;
+$link-hover-color: #5739ef;
 
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
@@ -32,7 +33,7 @@ body {
   background: $bg-color;
   font-family: "Ubuntu", sans-serif;
   color: $text-color;
-  padding-top: 130px;
+  padding-top: 100px;
 }
 a {
   text-decoration: none;
@@ -123,14 +124,15 @@ input[type="number"]::-webkit-outer-spin-button {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.5; /* Firefox */
   }
-  .is-invalid {
-  }
 }
 
 a.link {
   text-decoration: none;
-  text-size: 16px;
+  font-size: 16px;
   color: $link-color;
+  &:hover {
+    color: $link-hover-color;
+  }
 }
 .btn {
   padding: 0.5rem 1rem;
@@ -151,7 +153,7 @@ a.link {
 }
 
 .navbar {
-  padding: 30px;
+  padding: 1rem;
   background: $bg-color;
   .navbar-brand {
     font-size: 38px;
@@ -181,16 +183,15 @@ a.link {
     width: 50px;
     height: 50px;
     border-radius: $border-radius;
-    background-color: $bg-color-light;
-    margin: 0 10px;
+    // background-color: $bg-color-light;
     display: flex;
-    box-shadow: $shodow-sm;
+    // box-shadow: $shodow-sm;
     &:hover {
       color: $link-color !important;
     }
     svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
       margin: auto;
     }
 
@@ -220,7 +221,8 @@ a.link {
 
 .sidebar-col {
   position: fixed;
-  max-width: calc(25% - 2rem - 2px);
+  left: 0;
+  max-width: calc(30% - 4rem - 2px);
   &.col-md-1 {
     max-width: calc(8.33% - 10px);
   }
@@ -276,7 +278,6 @@ a.link {
   .logo {
     display: flex;
     padding: 1rem;
-    padding-bottom: 0;
     justify-content: space-between;
 
     .logo-img {
@@ -297,20 +298,28 @@ a.link {
       align-self: center;
     }
   }
+  .navs {
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+  }
   .nav {
     flex-wrap: initial;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 0;
     padding: 1rem;
+    padding-top: 0;
+
     hr {
       background: #c4c4c4;
       margin: 0.5rem;
     }
     .nav-link {
+      display: flex;
       width: 100%;
       border-radius: $border-radius;
       margin-bottom: 1rem;
-      padding: 1rem 0.75rem;
+      padding: 0.5rem;
       font-size: 16px;
       color: $text-color;
       font-weight: 300;
@@ -320,18 +329,23 @@ a.link {
         color: $link-color;
       }
       svg {
-        font-size: 20px;
-        margin-right: 0.5rem;
-      }
-      &:last-child {
-        margin-top: auto;
-        margin-bottom: 0%;
-        color: $link-color;
+        font-size: 18px;
+        margin: auto;
       }
     }
-    .sub-nav-link {
-      width: 90%;
-      margin-left: auto;
+    &:nth-child(2) {
+      h6 {
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+      }
+      flex-grow: 1;
+      border-left: 1px solid $border-color;
+      padding: 0;
+      .nav-link {
+        padding-left: 2rem;
+        border-radius: 0%;
+        margin-bottom: 0.25rem;
+      }
     }
   }
 }

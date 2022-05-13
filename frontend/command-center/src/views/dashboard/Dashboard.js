@@ -1,16 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "animate.css";
 import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Dropdown,
-  Nav,
-  Row,
-  Table,
-} from "react-bootstrap";
+import { Card, Col, Container, Nav, Row, Table } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Header from "../includes/Header";
@@ -37,9 +28,9 @@ export default function Dashboard() {
 
       <Header />
 
-      <Container>
+      <Container fluid>
         <Row>
-          <Col className="sidebar-col" md={!isNavbarCollapsed ? 3 : 1}>
+          <Col className="sidebar-col" md={!isNavbarCollapsed ? 4 : 1}>
             <div
               className={!isNavbarCollapsed ? "sidebar" : "sidebar collapsed"}
             >
@@ -48,60 +39,50 @@ export default function Dashboard() {
                   <div className="logo-img">
                     <img src="http://via.placeholder.com/128x128" alt="..." />
                   </div>
-                  <a className="author-name" href="http://www.creative-tim.com">
-                    {isLoggedIn ? "ok" : "no"}
-                  </a>
+                  <a
+                    className="author-name"
+                    href="http://www.creative-tim.com"
+                  ></a>
                 </div>
-                <Nav>
-                  <hr />
-
-                  <Nav.Link>
-                    <FontAwesomeIcon icon="fa-solid fa-table-cells-large" />
-                    Dashboard
-                  </Nav.Link>
-                  <Nav.Link data-target="#dropdown-1" onClick={toggleDropdown}>
-                    <FontAwesomeIcon icon="fa-solid fa-users" />
-                    Employees
-                  </Nav.Link>
-                  <Dropdown
-                    className="animate__animated animate__fadeIn"
-                    id="dropdown-1"
-                    style={{ display: "none" }}
-                  >
-                    <Nav.Link className="sub-nav-link">
-                      <FontAwesomeIcon icon="fa-solid fa-users" />
-                      Edit Employees
+                <div className="navs">
+                  <Nav>
+                    <Nav.Link>
+                      <FontAwesomeIcon icon="fa-solid fa-table-cells-large" />
                     </Nav.Link>
-                    <Nav.Link className="sub-nav-link">
+                    <Nav.Link>
                       <FontAwesomeIcon icon="fa-solid fa-users" />
-                      Edit Employees
                     </Nav.Link>
-                  </Dropdown>
-                  <Nav.Link>
-                    <FontAwesomeIcon icon="fa-solid fa-envelope" />
-                    Mails
-                  </Nav.Link>
-                  <Nav.Link>
-                    <FontAwesomeIcon icon="fa-solid fa-table-columns" /> Table
-                  </Nav.Link>
-                  <Nav.Link>
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
-                    Logout
-                  </Nav.Link>
+                    <Nav.Link>
+                      <FontAwesomeIcon icon="fa-solid fa-envelope" />
+                    </Nav.Link>
+                    <Nav.Link>
+                      <FontAwesomeIcon icon="fa-solid fa-table-columns" />
+                    </Nav.Link>
+                    <Nav.Link>
+                      <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
+                    </Nav.Link>
 
-                  <Nav.Link>
-                    <FontAwesomeIcon icon="fa-solid fa-gear" />
-                    Settings
-                  </Nav.Link>
-                </Nav>
+                    <Nav.Link>
+                      <FontAwesomeIcon icon="fa-solid fa-gear" />
+                    </Nav.Link>
+                  </Nav>
+
+                  <Nav>
+                    <h6>Users, Roles, Permissions</h6>
+
+                    <Nav.Link>Users</Nav.Link>
+                    <Nav.Link>Roles</Nav.Link>
+                    <Nav.Link>Permissions</Nav.Link>
+                  </Nav>
+                </div>
               </div>
-              <Button className="hamburger-btn" onClick={toggleNavbar}>
+              {/* <Button className="hamburger-btn" onClick={toggleNavbar}>
                 {!isNavbarCollapsed ? (
                   <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
                 ) : (
                   <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
                 )}
-              </Button>
+              </Button> */}
             </div>
           </Col>
           <Col md={!isNavbarCollapsed ? 3 : 1}></Col>

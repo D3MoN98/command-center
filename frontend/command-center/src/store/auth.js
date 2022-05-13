@@ -43,8 +43,8 @@ const loginAction = (data) => (dispatch, getState) => {
         .catch((error) => {
           if (error.request.status == 422) {
             toast.error(error.response.data.message);
-            reject(error);
           }
+          reject(error);
         });
     });
   });

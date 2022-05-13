@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <Navbar fixed="top">
-      <Container>
+      <Container fluid>
         <Navbar.Brand href="#home">Navbar</Navbar.Brand>
         <Form.Control
           type="text"

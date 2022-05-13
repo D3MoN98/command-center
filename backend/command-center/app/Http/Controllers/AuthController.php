@@ -90,7 +90,7 @@ class AuthController extends Controller
 
             return $status === Password::PASSWORD_RESET
                 ? response()->json(['status' => 'success', 'message' => __($status)])
-                : response()->json(['status' => 'error', 'message' => __($status)]);
+                : response()->json(['status' => 'error', 'message' => __($status)], 422);
         } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }

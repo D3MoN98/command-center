@@ -20,7 +20,16 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route
+          path="/"
+          element={
+            <GuestMiddleware>
+              <SimpleLayout>
+                <App />
+              </SimpleLayout>
+            </GuestMiddleware>
+          }
+        />
 
         <Route
           path="/login"
