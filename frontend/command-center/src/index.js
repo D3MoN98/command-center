@@ -13,6 +13,7 @@ import Login from "./views/auth/Login";
 import ResetPassword from "./views/auth/ResetPassword";
 import Dashboard from "./views/dashboard/Dashboard";
 import NotFound from "./views/errors/NotFound";
+import DashBoardLayout from "./views/layouts/DashBoardLayout";
 import SimpleLayout from "./views/layouts/SimpleLayout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -68,7 +69,9 @@ root.render(
           path="dashboard"
           element={
             <AuthMiddleware>
-              <Dashboard />
+              <DashBoardLayout>
+                <Dashboard />
+              </DashBoardLayout>
             </AuthMiddleware>
           }
         />
