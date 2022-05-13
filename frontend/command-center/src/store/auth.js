@@ -63,9 +63,45 @@ const logoutAction = (data) => (dispatch, getState) => {
   });
 };
 
+const forgotPasswordAction = (data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    axios.get("sanctum/csrf-cookie").then((response) => {
+      axios
+        .post("api/forgot-password", data)
+        .then((response) => response.data)
+        .then((response) => {
+          toast.success(response.message);
+          resolve(response);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+          reject(error);
+        });
+    });
+  });
+};
+
+const resetPasswordAction = (data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post("api/reset-password", data)
+      .then((response) => response.data)
+      .then((response) => {
+        toast.success(response.message);
+        resolve(response);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        reject(error);
+      });
+  });
+};
+
 export const authActionCreator = {
   loginAction,
   logoutAction,
+  forgotPasswordAction,
+  resetPasswordAction,
 };
 
 export const authAction = auth.actions;

@@ -10,6 +10,7 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./store";
 import ForgetPassword from "./views/auth/ForgetPassword";
 import Login from "./views/auth/Login";
+import ResetPassword from "./views/auth/ResetPassword";
 import Dashboard from "./views/dashboard/Dashboard";
 import NotFound from "./views/errors/NotFound";
 import SimpleLayout from "./views/layouts/SimpleLayout";
@@ -35,9 +36,22 @@ root.render(
         <Route
           path="forget-password"
           element={
-            <SimpleLayout>
-              <ForgetPassword />
-            </SimpleLayout>
+            <GuestMiddleware>
+              <SimpleLayout>
+                <ForgetPassword />
+              </SimpleLayout>
+            </GuestMiddleware>
+          }
+        />
+
+        <Route
+          path="reset-password"
+          element={
+            <GuestMiddleware>
+              <SimpleLayout>
+                <ResetPassword />
+              </SimpleLayout>
+            </GuestMiddleware>
           }
         />
 

@@ -8,14 +8,47 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import FormError from "../../components/FormError";
+import { authActionCreator } from "../../store/auth";
 
 export default function ForgetPassword() {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [hasFormSubmited, setHasFormSubmited] = useState(false);
-  const forgetPassword = (e) => {
-    e.preventDefault();
 
-    setHasFormSubmited((prev) => !prev);
+  let user = {
+    email: {
+      value: null,
+      required: "Email is required",
+      pattern: {
+        value:
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        message: "invalid email address",
+      },
+    },
+  };
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({ criteriaMode: "all" });
+
+  const forgetPassword = (data) => {
+    setHasFormSubmited(true);
+
+    dispatch(authActionCreator.forgotPasswordAction(data))
+      .then(() => {
+        reset({ email: null });
+        setHasFormSubmited(false);
+      })
+      .catch(() => {
+        setHasFormSubmited(false);
+      });
   };
   return (
     <>
@@ -25,13 +58,16 @@ export default function ForgetPassword() {
             <Card>
               <Card.Title className="text-center">Forget Password?</Card.Title>
               <Card.Body>
-                <Form onSubmit={forgetPassword}>
+                <Form onSubmit={handleSubmit(forgetPassword)}>
                   <Form.Group className="form-group">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="example@email.com"
+                      className={errors.email ? "is-invalid" : ""}
+                      {...register("email", user.email)}
                     />
+                    <FormError errors={errors} name="email" />
                   </Form.Group>
                   <Form.Group className="form-group text-center">
                     <Button
@@ -48,7 +84,7 @@ export default function ForgetPassword() {
                           aria-hidden="true"
                         />
                       ) : (
-                        "Request Password Reset"
+                        "Request Link"
                       )}
                     </Button>
                   </Form.Group>
