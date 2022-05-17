@@ -15,6 +15,7 @@ import Dashboard from "./views/dashboard/Dashboard";
 import NotFound from "./views/errors/NotFound";
 import DashBoardLayout from "./views/layouts/DashBoardLayout";
 import SimpleLayout from "./views/layouts/SimpleLayout";
+import UserList from "./views/users/UserList";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -71,6 +72,17 @@ root.render(
             <AuthMiddleware>
               <DashBoardLayout>
                 <Dashboard />
+              </DashBoardLayout>
+            </AuthMiddleware>
+          }
+        />
+
+        <Route
+          path="user"
+          element={
+            <AuthMiddleware>
+              <DashBoardLayout>
+                <UserList />
               </DashBoardLayout>
             </AuthMiddleware>
           }

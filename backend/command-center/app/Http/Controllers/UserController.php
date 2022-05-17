@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -22,9 +23,25 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return UserResource::collection(User::all());
+        $user = User::where('deleted_at', null);
+        if (isset($request->sort_by) && count(json_decode($request->sort_by)) > 0) {
+            $sort_bys = json_decode($request->sort_by);
+            if (count($sort_bys)) {
+                foreach ($sort_bys as $key) {
+                    $user->orderBy($key->id, $key->desc ? 'DESC' : 'ASC');
+                }
+            }
+        }
+
+        if (isset($request->keyword) && !empty($request->keyword)) {
+            $user->where('email', 'like', "%$request->keyword%");
+            $user->orWhere('name', 'like', "%$request->keyword%");
+            $user->orWhere('contact_no', 'like', "%$request->keyword%");
+        }
+
+        return UserResource::collection($user->paginate($request->per_page));
     }
 
     /**
@@ -58,7 +75,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $user = User::find($id)->update($request->all());
+            return response()->json(['status' => 'successful', 'message' => 'user updated']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
 
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('user', [UserController::class, 'index']);
+        Route::apiResource('user', UserController::class);
+        Route::apiResource('role', RoleController::class)->except(['store', 'delete']);
     });
 });
 

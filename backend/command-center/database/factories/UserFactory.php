@@ -20,6 +20,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'contact_no' => $this->faker->unique()->phoneNumber(),
+            'status' => true,
             'email_verified_at' => now(),
             'password' => Hash::make("password"), // password
             'remember_token' => Str::random(10),
@@ -49,7 +50,7 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'admin',
-                'email' => 'admin@gmail.com',
+                'email' => 'sjgalaxy98@gmail.com',
             ];
         });
     }

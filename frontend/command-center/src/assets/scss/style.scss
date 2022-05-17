@@ -77,6 +77,11 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 0.75rem 0.75rem;
 }
 .table {
+  thead {
+    svg {
+      margin-left: 1rem;
+    }
+  }
   tbodY {
     tr {
       cursor: pointer;
@@ -105,10 +110,10 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: 24px;
     color: $text-color;
     font-weight: 700;
-    padding: 1.5rem;
+    padding: 1rem;
   }
   .card-body {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
 
@@ -116,12 +121,14 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 1rem;
 }
 .form-control {
-  border: 1px solid $border-color;
-  padding: 0.75rem;
+  border: 1px solid transparent;
+  padding: 0.5rem;
+  background: $bg-color;
   border-radius: $border-radius;
   color: $text-color;
   &:active,
   &:focus {
+    // background: $bg-color;
     border-color: $border-hovre-color;
   }
   &::placeholder {
@@ -153,6 +160,29 @@ a.link {
   }
   &.w-spinner {
     width: 100px !important;
+  }
+  &.dropdown-toggle {
+    background: transparent;
+    border: none;
+    color: $text-color;
+    &::after {
+      content: none;
+    }
+    &:focus,
+    &:focus,
+    &:active {
+      outline: none;
+      color: $text-hover-color;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
+.dropdown-menu {
+  min-width: 12rem;
+  .dropdown-item {
+    padding: 0.5rem 1rem;
   }
 }
 
@@ -337,18 +367,21 @@ a.link {
         margin: auto;
       }
     }
-    &:nth-child(2) {
+    &:nth-child(3) {
       h6 {
         padding-left: 1rem;
         margin-bottom: 1rem;
       }
       flex-grow: 1;
-      border-left: 1px solid $border-color;
       padding: 0;
       .nav-link {
         padding-left: 2rem;
         border-radius: 0%;
         margin-bottom: 0.25rem;
+        svg {
+          margin: initial;
+          margin-right: 0.5rem;
+        }
       }
     }
   }
@@ -361,6 +394,7 @@ a.link {
     background-color: $bg-color-light;
     overflow: hidden;
     border: none;
+    height: 100%;
     .card-title {
       font-size: 24px;
       letter-spacing: 1px;
@@ -372,9 +406,6 @@ a.link {
       svg {
         font-size: 14px;
       }
-    }
-    .card-body {
-      padding: 1.5rem;
     }
   }
 }

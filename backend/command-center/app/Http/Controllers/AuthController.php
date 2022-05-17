@@ -24,7 +24,7 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $user = User::where('email', $request->email)->firstOrFail();
+        $user = User::where('email', $request->email)->where('status', true)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
             'status' => 'success',

@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             ->create();
 
         $users = User::factory()
-            ->count(3)
+            ->count(20)
             ->create();
     }
 }

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Col, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Sidebar(props) {
   let [subNavType, setSubNavType] = useState("dashboard");
@@ -48,6 +49,8 @@ export default function Sidebar(props) {
                 </Nav.Link>
               </Nav>
 
+              <div className="vr"></div>
+
               {SubNavs(subNavType)}
             </div>
           </div>
@@ -72,7 +75,9 @@ export const SubNavs = (key = "settings") => {
         <Nav>
           <h6>Dashboard</h6>
 
-          <Nav.Link to="/dashboard">Home</Nav.Link>
+          <Link className="nav-link" to="/dashboard">
+            <FontAwesomeIcon icon="fa-solid fa-house-user" /> Home
+          </Link>
         </Nav>
       );
       break;
@@ -81,9 +86,15 @@ export const SubNavs = (key = "settings") => {
         <Nav>
           <h6>Users, Roles, Permissions</h6>
 
-          <Nav.Link>Users</Nav.Link>
-          <Nav.Link>Roles</Nav.Link>
-          <Nav.Link>Permissions</Nav.Link>
+          <Link className="nav-link" to="/user">
+            <FontAwesomeIcon icon="fa-solid fa-users" /> Users
+          </Link>
+          <Nav.Link>
+            <FontAwesomeIcon icon="fa-solid fa-user-shield" /> Roles
+          </Nav.Link>
+          <Nav.Link>
+            <FontAwesomeIcon icon="fa-solid fa-user-lock" /> Permissions
+          </Nav.Link>
         </Nav>
       );
       break;

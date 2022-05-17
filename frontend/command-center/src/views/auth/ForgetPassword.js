@@ -11,8 +11,8 @@ import {
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import FormError from "../../components/FormError";
 import { authActionCreator } from "../../store/auth";
+import FormError from "../components/FormError";
 
 export default function ForgetPassword() {
   let dispatch = useDispatch();

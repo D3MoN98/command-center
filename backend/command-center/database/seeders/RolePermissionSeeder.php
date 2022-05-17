@@ -18,7 +18,8 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'user' => ['list', 'create', 'view', 'update', 'delete']
+            'user' => ['list', 'create', 'view', 'update', 'delete'],
+            'role' => ['list', 'create', 'view', 'update', 'delete'],
         ];
 
 
