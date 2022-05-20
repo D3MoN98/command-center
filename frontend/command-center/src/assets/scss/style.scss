@@ -126,10 +126,13 @@ input[type="number"]::-webkit-outer-spin-button {
   background: $bg-color;
   border-radius: $border-radius;
   color: $text-color;
+  // border-color: $border-color;
+
   &:active,
   &:focus {
-    // background: $bg-color;
-    border-color: $border-hovre-color;
+    background: $bg-color;
+    border-color: transparent;
+    // border-color: $border-hovre-color;
   }
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -145,8 +148,8 @@ a.link {
     color: $link-hover-color;
   }
 }
-.btn {
-  padding: 0.5rem 1rem;
+.btn.btn-primary {
+  padding: 0.25rem 0.75rem;
   font-weight: bold;
   border-radius: $border-radius;
   background: $button-color;
@@ -179,6 +182,13 @@ a.link {
   }
 }
 
+.btn.btn-link {
+  color: $text-color;
+  &:hover {
+    color: $text-hover-color;
+  }
+}
+
 .dropdown-menu {
   min-width: 12rem;
   .dropdown-item {
@@ -207,6 +217,7 @@ a.link {
     border-radius: $border-radius;
     box-shadow: $shodow-sm;
     transition: all 0.1s ease;
+    background-color: $bg-color-light;
 
     &.hidden {
       width: 0%;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::apiResource('user', UserController::class);
         Route::apiResource('role', RoleController::class)->except(['store', 'delete']);
+        Route::apiResource('permission', PermissionController::class)->except(['store', 'delete']);
+        Route::put('role/permission/{id}', [RoleController::class, 'setPermission'])->name('set-permission');
     });
 });
 

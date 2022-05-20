@@ -8,7 +8,7 @@ export default function Sidebar(props) {
 
   return (
     <>
-      <Col className="sidebar-col" md={!props.isNavbarCollapsed ? 4 : 1}>
+      <Col className="sidebar-col" lg={!props.isNavbarCollapsed ? 4 : 1}>
         <div
           className={!props.isNavbarCollapsed ? "sidebar" : "sidebar collapsed"}
         >
@@ -63,7 +63,7 @@ export default function Sidebar(props) {
               </Button> */}
         </div>
       </Col>
-      <Col md={!props.isNavbarCollapsed ? 3 : 1}></Col>
+      <Col lg={!props.isNavbarCollapsed ? 3 : 1}></Col>
     </>
   );
 }
@@ -84,14 +84,14 @@ export const SubNavs = (key = "settings") => {
     case "settings":
       return (
         <Nav>
-          <h6>Users, Roles, Permissions</h6>
+          <h6>Users settings</h6>
 
           <Link className="nav-link" to="/user">
             <FontAwesomeIcon icon="fa-solid fa-users" /> Users
           </Link>
-          <Nav.Link>
+          <Link className="nav-link" to="/role">
             <FontAwesomeIcon icon="fa-solid fa-user-shield" /> Roles
-          </Nav.Link>
+          </Link>
           <Nav.Link>
             <FontAwesomeIcon icon="fa-solid fa-user-lock" /> Permissions
           </Nav.Link>

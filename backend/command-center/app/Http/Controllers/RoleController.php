@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\RoleResource;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -25,7 +26,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return RoleResource::collection(Role::all());
+        return RoleResource::collection(Role::paginate(10));
     }
 
     /**
@@ -47,7 +48,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        return new RoleResource(Role::find($id));
     }
 
     /**
@@ -59,7 +60,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $role = Role::find($id);
+
+            $role->update($request->all());
+
+            return response()->json(['status' => 'success', 'message' => 'Role updated successfully', 'data' => new RoleResource($role->refresh())]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -71,5 +80,23 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function setPermission(Request $request, $id)
+    {
+        try {
+            $role = Role::find($id);
+            $permission = Permission::find($request->permission_id);
+
+            if ($request->checked) {
+                $role->givePermissionTo($permission);
+            } else {
+                $role->revokePermissionTo($permission);
+            }
+
+            return ['status' => 'success', 'message' => 'Permission status changed', 'data' =>  $role->refresh()];
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
     }
 }

@@ -25,7 +25,7 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($permissions as $key => $value) {
             foreach ($value as $key1) {
-                Permission::create(['name' => "$key.$key1"]);
+                Permission::create(['name' => "$key.$key1", 'label' => ucwords($key1), 'model' => $key]);
             }
         }
 
@@ -35,7 +35,7 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach ($roles as $role => $permissions) {
-            $role = Role::create(['name' => $role]);
+            $role = Role::create(['name' => $role, 'label' => ucwords(strtolower((str_replace('-', ' ', $role))))]);
             $role->syncPermissions($permissions);
         }
     }

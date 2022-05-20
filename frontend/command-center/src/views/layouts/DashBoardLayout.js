@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Toaster } from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
 import Header from "../includes/Header";
@@ -28,7 +28,9 @@ export default function DashBoardLayout({ children }) {
         <Row>
           <Sidebar isNavbarCollapsed={isNavbarCollapsed} />
 
-          {children}
+          <Col className="main" md="12" lg={!isNavbarCollapsed ? 9 : 11}>
+            {children}
+          </Col>
         </Row>
       </Container>
     </>

@@ -64,6 +64,15 @@ const logoutAction = (data) => (dispatch, getState) => {
   });
 };
 
+const AutoLogoutAction = (data) => (dispatch, getState) => {
+  return new Promise((resolve, reject) => {
+    toast.success("Auto logged out");
+    dispatch(authAction.logout());
+    resolve("Auto logged out");
+    reject("Something went wrong");
+  });
+};
+
 const forgotPasswordAction = (data) => (dispatch) => {
   return new Promise((resolve, reject) => {
     axios.get("sanctum/csrf-cookie").then((response) => {
@@ -103,6 +112,7 @@ export const authActionCreator = {
   logoutAction,
   forgotPasswordAction,
   resetPasswordAction,
+  AutoLogoutAction,
 };
 
 export const authAction = auth.actions;

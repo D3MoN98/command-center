@@ -15,6 +15,8 @@ import Dashboard from "./views/dashboard/Dashboard";
 import NotFound from "./views/errors/NotFound";
 import DashBoardLayout from "./views/layouts/DashBoardLayout";
 import SimpleLayout from "./views/layouts/SimpleLayout";
+import RoleEdit from "./views/roles-and-permissions/RoleEdit";
+import RoleList from "./views/roles-and-permissions/RoleList";
 import UserList from "./views/users/UserList";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -87,6 +89,29 @@ root.render(
             </AuthMiddleware>
           }
         />
+
+        <Route
+          path="role"
+          element={
+            <AuthMiddleware>
+              <DashBoardLayout>
+                <RoleList />
+              </DashBoardLayout>
+            </AuthMiddleware>
+          }
+        />
+
+        <Route
+          path="role/:id"
+          element={
+            <AuthMiddleware>
+              <DashBoardLayout>
+                <RoleEdit />
+              </DashBoardLayout>
+            </AuthMiddleware>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

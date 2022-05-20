@@ -41,7 +41,14 @@ export default function UserList(props) {
         header: "Status",
         accessor: "status",
       },
-
+      {
+        header: "Deleted",
+        accessor: "deleted_at",
+      },
+      {
+        header: "Last Login",
+        accessor: "last_login_at",
+      },
       {
         header: "",
         accessor: "action",
@@ -88,60 +95,60 @@ export default function UserList(props) {
 
   return (
     <>
-      <Col className="main" md={!props.isNavbarCollapsed ? 9 : 11}>
-        <Row>
-          <Col md={12}>
-            <Card className="mb-3">
-              <Card.Body>
-                <Card.Title>
-                  Users <FontAwesomeIcon icon="fa-solid fa-info" />
-                </Card.Title>
-                <hr />
-                <DataTable
-                  tableData={tableData}
-                  totalPage={totalPage}
-                  total={total}
-                  columns={columns}
-                >
-                  {users.map((user) => {
-                    return (
-                      <tr key={user.id}>
-                        <td>{user.name}</td>
-                        <td>
-                          <a href="mailto:{user.email}">{user.email}</a>
-                        </td>
-                        <td>
-                          <a href="tel:{user.contact_no}">{user.contact_no}</a>
-                        </td>
-                        <td>
-                          <Form.Select
-                            onChange={(e) => changeStatus(user.id, e)}
-                            value={user.status ? "1" : "0"}
-                          >
-                            <option value={1}>Active</option>
-                            <option value={0}>In Active</option>
-                          </Form.Select>
-                        </td>
-                        <td>
-                          <DropdownButton
-                            title={
-                              <FontAwesomeIcon icon="fa-solid fa-ellipsis-vertical" />
-                            }
-                          >
-                            <Dropdown.Item eventKey="1">View</Dropdown.Item>
-                            <Dropdown.Item eventKey="2">Edit</Dropdown.Item>
-                            <Dropdown.Item eventKey="3">Delete</Dropdown.Item>
-                          </DropdownButton>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </DataTable>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Col>
+      <Row>
+        <Col md={12}>
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>
+                Users <FontAwesomeIcon icon="fa-solid fa-info" />
+              </Card.Title>
+              <hr />
+              <DataTable
+                tableData={tableData}
+                totalPage={totalPage}
+                total={total}
+                columns={columns}
+              >
+                {users.map((user) => {
+                  return (
+                    <tr key={user.id}>
+                      <td>{user.name}</td>
+                      <td>
+                        <a href="mailto:{user.email}">{user.email}</a>
+                      </td>
+                      <td>
+                        <a href="tel:{user.contact_no}">{user.contact_no}</a>
+                      </td>
+                      <td>
+                        <Form.Select
+                          onChange={(e) => changeStatus(user.id, e)}
+                          value={user.status ? "1" : "0"}
+                        >
+                          <option value={1}>Active</option>
+                          <option value={0}>In Active</option>
+                        </Form.Select>
+                      </td>
+                      <td>{user.deleted_at}</td>
+                      <td>{user.last_login_at}</td>
+                      <td>
+                        <DropdownButton
+                          title={
+                            <FontAwesomeIcon icon="fa-solid fa-ellipsis-vertical" />
+                          }
+                        >
+                          <Dropdown.Item eventKey="1">View</Dropdown.Item>
+                          <Dropdown.Item eventKey="2">Edit</Dropdown.Item>
+                          <Dropdown.Item eventKey="3">Delete</Dropdown.Item>
+                        </DropdownButton>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </DataTable>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }

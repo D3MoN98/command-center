@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id)->update($request->all());
-            return response()->json(['status' => 'successful', 'message' => 'user updated']);
+            return response()->json(['status' => 'successful', 'message' => 'User updated']);
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class PermissionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = parent::toArray($request);
-        $user['last_login_at'] = Carbon::parse($this->last_login_at)->diffForHumans();
-        return $user;
+        return parent::toArray($request);
     }
 }
