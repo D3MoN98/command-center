@@ -31,9 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware('guest')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
-
     Route::post('forgot-password', [AuthController::class, 'forgetPassword'])->name('password.email');
-
-
     Route::post('reset-password', [AuthController::class, 'ResetPassword'])->name('password.update');
+    Route::get('login/google', [AuthController::class, 'googleLoginAction'])->name('login.google');
+    Route::get('login/google/callback', [AuthController::class, 'googleLoginCallback'])->name('login.google.callback');
 });

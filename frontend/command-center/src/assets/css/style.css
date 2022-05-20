@@ -145,7 +145,7 @@ a.link:hover {
 }
 
 .btn.btn-primary {
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   font-weight: bold;
   border-radius: 8px;
   background: #8973f2;
@@ -181,12 +181,26 @@ a.link:hover {
           box-shadow: none;
 }
 
-.btn.btn-link {
+.btn.btn-primary.btn-sm {
+  padding: 0.25rem 0.75rem;
+}
+
+.btn.btn-primary.btn-link {
   color: rgba(0, 0, 0, 0.6);
 }
 
-.btn.btn-link:hover {
+.btn.btn-primary.btn-link:hover {
   color: rgba(0, 0, 0, 0.8);
+}
+
+.btn.btn-primary.btn-google {
+  color: #ffffff;
+  background: #3f7ee8;
+  border-color: #3f7ee8;
+}
+
+.btn.btn-primary.btn-google:hover {
+  background: #4175cf;
 }
 
 .dropdown-menu {

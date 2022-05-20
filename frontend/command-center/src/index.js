@@ -1,3 +1,6 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -18,6 +21,8 @@ import SimpleLayout from "./views/layouts/SimpleLayout";
 import RoleEdit from "./views/roles-and-permissions/RoleEdit";
 import RoleList from "./views/roles-and-permissions/RoleList";
 import UserList from "./views/users/UserList";
+
+library.add(fas, fab);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

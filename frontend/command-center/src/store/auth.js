@@ -51,6 +51,45 @@ const loginAction = (data) => (dispatch, getState) => {
   });
 };
 
+const googleLoginAction = (data) => (dispatch, getState) => {
+  return new Promise((resolve, reject) => {
+    axios.get("sanctum/csrf-cookie").then((response) => {
+      axios
+        .get("api/login/google")
+        .then((response) => response.data)
+        .then((response) => {
+          if (response.status == "success") {
+            resolve(response);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  });
+};
+
+const googleLoginCallbackAction = (query) => (dispatch, getState) => {
+  return new Promise((resolve, reject) => {
+    axios.get("sanctum/csrf-cookie").then((response) => {
+      axios
+        .get(`api/login/google/callback/${query}`)
+        .then((response) => response.data)
+        .then((response) => {
+          if (response.status == "success") {
+            console.log(response);
+            dispatch(auth.actions.login(response.data));
+            toast.success(response.message);
+            resolve(response);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  });
+};
+
 const logoutAction = (data) => (dispatch, getState) => {
   return new Promise((resolve, reject) => {
     axios
@@ -113,6 +152,8 @@ export const authActionCreator = {
   forgotPasswordAction,
   resetPasswordAction,
   AutoLogoutAction,
+  googleLoginAction,
+  googleLoginCallbackAction,
 };
 
 export const authAction = auth.actions;

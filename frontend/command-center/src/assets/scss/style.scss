@@ -149,7 +149,7 @@ a.link {
   }
 }
 .btn.btn-primary {
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   font-weight: bold;
   border-radius: $border-radius;
   background: $button-color;
@@ -180,12 +180,22 @@ a.link {
       box-shadow: none;
     }
   }
-}
-
-.btn.btn-link {
-  color: $text-color;
-  &:hover {
-    color: $text-hover-color;
+  &.btn-sm {
+    padding: 0.25rem 0.75rem;
+  }
+  &.btn-link {
+    color: $text-color;
+    &:hover {
+      color: $text-hover-color;
+    }
+  }
+  &.btn-google {
+    color: #ffffff;
+    background: #3f7ee8;
+    border-color: #3f7ee8;
+    &:hover {
+      background: #4175cf;
+    }
   }
 }
 

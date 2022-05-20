@@ -21,10 +21,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'google_id',
         'name',
         'email',
         'password',
         'status',
+        'avatar',
         'last_login_at',
         'last_login_ip_address',
     ];
@@ -35,6 +37,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'google_id',
         'password',
         'remember_token',
     ];

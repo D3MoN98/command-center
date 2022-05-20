@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -24,7 +24,7 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $user = User::where('email', $request->email)->where('status', true)->firstOrFail();
+        $user = User::where('email', $request->email)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
             'status' => 'success',
@@ -93,6 +93,50 @@ class AuthController extends Controller
                 : response()->json(['status' => 'error', 'message' => __($status)], 422);
         } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function googleLoginAction()
+    {
+        try {
+            $url = Socialite::driver('google')->stateless()->redirect()->getTargetUrl();
+
+            return response()->json(['status' => 'success', 'messsage' => 'Working..', 'url' => $url]);
+        } catch (Exception $e) {
+            return response()->json(['status' => 'error', 'messsage' => $e->getMessage()], 500);
+        }
+    }
+
+    public function googleLoginCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+
+            $user = User::updateOrCreate(
+                ['email' => $googleUser['email']],
+                [
+                    'email' =>  $googleUser->email,
+                    'name' =>  $googleUser->name,
+                    'avatar' =>  $googleUser->avatar,
+                    'google_id' =>  $googleUser->id
+                ]
+            );
+
+            Auth::login($user);
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login successful',
+                'data' => [
+                    'user' => $user,
+                    'auth_token' => $token,
+                    'token_type' => 'Bearer',
+                ]
+            ]);
+
+            return response()->json(['status' => 'success', 'message' => 'Login successfull', 'data' => $user]);
+        } catch (Exception $e) {
+            return response()->json(['status' => 'error', 'messsage' => $e->getMessage()], 500);
         }
     }
 }

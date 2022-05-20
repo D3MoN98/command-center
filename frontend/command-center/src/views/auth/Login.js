@@ -1,4 +1,5 @@
-import { React, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { React, useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -10,14 +11,26 @@ import {
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { authActionCreator } from "../../store/auth";
 import FormError from "../components/FormError";
 
-export default function Login() {
+export default function Login(props) {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   let [hasFormSubmited, setHasFormSubmited] = useState(false);
+  let [hasGoogleLoginSubmited, setHasGoogleLoginSubmited] = useState(false);
+  const params = window.location.search;
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("google")) {
+      setHasGoogleLoginSubmited(true);
+      dispatch(authActionCreator.googleLoginCallbackAction(params)).then(() => {
+        setHasGoogleLoginSubmited(false);
+      });
+    }
+  }, []);
 
   let user = {
     email: {
@@ -53,7 +66,6 @@ export default function Login() {
         navigate("/dashboard");
       })
       .catch((error) => {
-        console.log(error);
         setHasFormSubmited(false);
       });
   };
@@ -69,7 +81,35 @@ export default function Login() {
               </Card.Title>
 
               <Card.Body>
-                <Form onSubmit={handleSubmit(login)}>
+                <Button
+                  disabled={hasGoogleLoginSubmited || hasFormSubmited}
+                  className="btn-google w-100"
+                  onClick={() => {
+                    setHasGoogleLoginSubmited(true);
+                    dispatch(authActionCreator.googleLoginAction()).then(
+                      (response) => {
+                        console.log(response.url);
+                        window.location.href = response.url;
+                      }
+                    );
+                  }}
+                >
+                  {hasGoogleLoginSubmited ? (
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon="fa-brands fa-google" />
+                      <span className="fw-bold"> Sign in with Google </span>
+                    </>
+                  )}
+                </Button>
+                <Form className="mt-3" onSubmit={handleSubmit(login)}>
                   <Form.Group className="form-group">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -95,6 +135,7 @@ export default function Login() {
                       className={hasFormSubmited ? "w-spinner" : "w-100"}
                       variant="primary"
                       type="submit"
+                      disabled={hasFormSubmited || hasGoogleLoginSubmited}
                     >
                       {hasFormSubmited ? (
                         <Spinner
