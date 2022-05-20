@@ -8,7 +8,7 @@ export default function AuthMiddleware({ children }) {
   let authUser = useSelector((state) => state.auth.authUser);
   let dispatch = useDispatch();
 
-  const sessionTime = 10 * 60;
+  const sessionTime = 10 * 60 * 60;
 
   // auto logout
   useEffect(() => {

@@ -377,6 +377,10 @@ a.link {
         font-size: 18px;
         margin: auto;
       }
+      &.active {
+        background-color: $accent-color;
+        color: $link-color;
+      }
     }
     &:nth-child(3) {
       h6 {

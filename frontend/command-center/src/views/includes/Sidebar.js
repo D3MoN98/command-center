@@ -1,10 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import _ from "lodash";
+import React, { useEffect, useState } from "react";
 import { Col, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function Sidebar(props) {
+  let location = useLocation();
   let [subNavType, setSubNavType] = useState("dashboard");
+
+  const navRoutes = [
+    {
+      head: "dashboard",
+      paths: ["dashboard"],
+    },
+    {
+      head: "settings",
+      paths: ["user", "role", "permission"],
+    },
+  ];
+
+  useEffect(() => {
+    const segments = location.pathname.split("/");
+    const headNav = _.find(navRoutes, function (o) {
+      return o.paths.includes(segments[1]);
+    });
+    setSubNavType(headNav.head);
+  }, [location]);
 
   return (
     <>
@@ -32,12 +53,6 @@ export default function Sidebar(props) {
                 </Nav.Link>
                 <Nav.Link data-tip="Mails">
                   <FontAwesomeIcon icon="fa-solid fa-envelope" />
-                </Nav.Link>
-                <Nav.Link>
-                  <FontAwesomeIcon icon="fa-solid fa-table-columns" />
-                </Nav.Link>
-                <Nav.Link>
-                  <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
                 </Nav.Link>
 
                 <Nav.Link
@@ -75,9 +90,14 @@ export const SubNavs = (key = "settings") => {
         <Nav>
           <h6>Dashboard</h6>
 
-          <Link className="nav-link" to="/dashboard">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active nav-link" : " nav-link"
+            }
+            to="/dashboard"
+          >
             <FontAwesomeIcon icon="fa-solid fa-house-user" /> Home
-          </Link>
+          </NavLink>
         </Nav>
       );
       break;
@@ -86,12 +106,22 @@ export const SubNavs = (key = "settings") => {
         <Nav>
           <h6>Users settings</h6>
 
-          <Link className="nav-link" to="/user">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active nav-link" : " nav-link"
+            }
+            to="/user"
+          >
             <FontAwesomeIcon icon="fa-solid fa-users" /> Users
-          </Link>
-          <Link className="nav-link" to="/role">
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active nav-link" : " nav-link"
+            }
+            to="/role"
+          >
             <FontAwesomeIcon icon="fa-solid fa-user-shield" /> Roles
-          </Link>
+          </NavLink>
           <Nav.Link>
             <FontAwesomeIcon icon="fa-solid fa-user-lock" /> Permissions
           </Nav.Link>
