@@ -18,6 +18,7 @@ import Dashboard from "./views/dashboard/Dashboard";
 import NotFound from "./views/errors/NotFound";
 import DashBoardLayout from "./views/layouts/DashBoardLayout";
 import SimpleLayout from "./views/layouts/SimpleLayout";
+import Profile from "./views/profile/Profile";
 import RoleEdit from "./views/roles-and-permissions/RoleEdit";
 import RoleList from "./views/roles-and-permissions/RoleList";
 import UserList from "./views/users/UserList";
@@ -79,6 +80,17 @@ root.render(
             <AuthMiddleware>
               <DashBoardLayout>
                 <Dashboard />
+              </DashBoardLayout>
+            </AuthMiddleware>
+          }
+        />
+
+        <Route
+          path="profile"
+          element={
+            <AuthMiddleware>
+              <DashBoardLayout>
+                <Profile />
               </DashBoardLayout>
             </AuthMiddleware>
           }

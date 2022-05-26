@@ -6,14 +6,20 @@ export default function FormError(props) {
     <ErrorMessage
       errors={props.errors}
       name={props.name}
-      render={({ messages }) =>
-        messages &&
-        Object.entries(messages).map(([type, message]) => (
-          <span className="invalid-feedback" key={type}>
-            {message}
-          </span>
-        ))
-      }
+      render={({ messages, message }) => {
+        if (message) {
+          return message && <span className="invalid-feedback">{message}</span>;
+        } else {
+          return (
+            messages &&
+            Object.entries(messages).map(([type, message]) => (
+              <span className="invalid-feedback" key={type}>
+                {message}
+              </span>
+            ))
+          );
+        }
+      }}
     />
   );
 }

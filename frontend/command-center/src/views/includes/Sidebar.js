@@ -24,7 +24,9 @@ export default function Sidebar(props) {
     const headNav = _.find(navRoutes, function (o) {
       return o.paths.includes(segments[1]);
     });
-    setSubNavType(headNav.head);
+    if (headNav) {
+      setSubNavType(headNav.head);
+    }
   }, [location]);
 
   return (

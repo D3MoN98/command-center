@@ -2,12 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Container, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { authActionCreator } from "../../store/auth";
 
 export default function Header() {
   let dispatch = useDispatch();
   let [isSearchBarHidden, setIsSearchBarHidden] = useState(true);
+  let [menuIsOpened, setMenuIsOpened] = useState(false);
   let navigate = useNavigate();
 
   const toggleSearchBar = (e) => {
@@ -21,6 +22,13 @@ export default function Header() {
     dispatch(authActionCreator.logoutAction()).then(() => {
       navigate("/login");
     });
+  };
+
+  const handleClick = () => {
+    setMenuIsOpened(false);
+  };
+  const handleToggle = () => {
+    setMenuIsOpened((prev) => !prev);
   };
 
   return (
@@ -50,8 +58,18 @@ export default function Header() {
               Separated link
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title={<FontAwesomeIcon icon="fa-solid fa-user" />}>
-            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+          <NavDropdown
+            show={menuIsOpened}
+            onToggle={handleToggle}
+            title={<FontAwesomeIcon icon="fa-solid fa-user" />}
+          >
+            <NavLink
+              to="/profile"
+              onClick={handleClick}
+              className="dropdown-item"
+            >
+              Profile
+            </NavLink>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
           </NavDropdown>

@@ -24,6 +24,10 @@ const auth = createSlice({
       state.authToken = null;
       state.authUser = null;
     },
+    setAuthUser(state, action) {
+      localStorage.setItem("auth_user", JSON.stringify(action.payload.data));
+      state.authUser = action.payload.data;
+    },
   },
 });
 
@@ -133,7 +137,7 @@ const forgotPasswordAction = (data) => (dispatch) => {
 const resetPasswordAction = (data) => (dispatch) => {
   return new Promise((resolve, reject) => {
     axios
-      .post("api/reset-password", data)
+      .put("api/reset-password", data)
       .then((response) => response.data)
       .then((response) => {
         toast.success(response.message);
@@ -141,6 +145,22 @@ const resetPasswordAction = (data) => (dispatch) => {
       })
       .catch((error) => {
         toast.error(error.response.data.message);
+        reject(error);
+      });
+  });
+};
+
+const profileEditAction = (data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put("api/profile", data)
+      .then((response) => response.data)
+      .then((response) => {
+        dispatch(auth.actions.setAuthUser(response));
+        toast.success(response.message);
+        resolve(response);
+      })
+      .catch((error) => {
         reject(error);
       });
   });
@@ -154,6 +174,7 @@ export const authActionCreator = {
   AutoLogoutAction,
   googleLoginAction,
   googleLoginCallbackAction,
+  profileEditAction,
 };
 
 export const authAction = auth.actions;

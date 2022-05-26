@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -117,8 +119,10 @@ class AuthController extends Controller
                 [
                     'email' =>  $googleUser->email,
                     'name' =>  $googleUser->name,
+                    'password' =>  Hash::make($googleUser->id),
                     'avatar' =>  $googleUser->avatar,
-                    'google_id' =>  $googleUser->id
+                    'google_id' =>  $googleUser->id,
+                    'status' => true
                 ]
             );
 
@@ -137,6 +141,36 @@ class AuthController extends Controller
             return response()->json(['status' => 'success', 'message' => 'Login successfull', 'data' => $user]);
         } catch (Exception $e) {
             return response()->json(['status' => 'error', 'messsage' => $e->getMessage()], 500);
+        }
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        try {
+            $id = Auth::id();
+            $user = Auth::user();
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+                'contact_no' => ['required', Rule::unique('users', 'contact_no')->ignore($user->id)],
+            ], [
+                'name.required' => 'Name field is required.',
+                'email.required' => 'Email field is required.',
+                'email.email' => 'Please proide an valid email address.',
+                'contact_no.required' => 'Contact No field is required.',
+            ]);
+
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+
+            User::findOrFail($user->id)->update($request->all());
+
+            return response()->json(['status' => 'success', 'message' => 'Profile updated successfully', 'data' => new UserResource($user->refresh())]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e], 500);
         }
     }
 }

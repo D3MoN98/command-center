@@ -30,6 +30,14 @@ axiosInstance.interceptors.response.use(
     if (!badResponseCodeExceptions.includes(error.response.status)) {
       toast.error(error.response.statusText);
     }
+    if (
+      error.response.status == 401 &&
+      error.response.statusText == "Unauthorized"
+    ) {
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("auth_user");
+      window.location.href = "/";
+    }
     return Promise.reject(error);
   }
 );

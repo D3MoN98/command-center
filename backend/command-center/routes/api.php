@@ -27,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('permission', PermissionController::class)->except(['store', 'delete']);
         Route::put('role/permission/{id}', [RoleController::class, 'setPermission'])->name('set-permission');
     });
+
+    Route::put('profile', [AuthController::class, 'profileUpdate'])->name('profile.update');
 });
 
 Route::middleware('guest')->group(function () {

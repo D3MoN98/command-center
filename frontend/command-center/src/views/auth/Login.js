@@ -35,19 +35,19 @@ export default function Login(props) {
   let user = {
     email: {
       value: "sjgalaxy98@gmail.com",
-      required: "Email is required",
+      required: "Email is required.",
       pattern: {
         value:
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: "invalid email address",
+        message: "Email address is not valid.",
       },
     },
     password: {
       value: "password",
-      required: "Password is required",
+      required: "Password is required.",
       minLength: {
         value: 6,
-        message: "Password must be atleast 6 characters",
+        message: "Password must be atleast 6 characters.",
       },
     },
   };

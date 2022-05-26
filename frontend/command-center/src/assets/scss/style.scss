@@ -1,7 +1,7 @@
 // background colors variables
 // $bg-color: #f2fff8;
 // $bg-color: #efefef;
-$bg-color: #f6f6f9;
+$bg-color: #fbfbfb;
 $bg-color-secondary: #eaf2ff;
 $bg-color-light: #ffffff;
 
@@ -15,7 +15,9 @@ $link-color: #8973f2;
 
 // shadow variables
 $filter-color: drop-shadow(0px 10px 11.5px rgba(196, 200, 208, 0.4));
-$shodow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$shodow-sm: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+  rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+// $shodow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 
 // border-radius
 $border-color: #d7d7d7;
@@ -121,7 +123,7 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 1rem;
 }
 .form-control {
-  border: 1px solid transparent;
+  border: 1px solid $border-color;
   padding: 0.5rem;
   background: $bg-color;
   border-radius: $border-radius;
