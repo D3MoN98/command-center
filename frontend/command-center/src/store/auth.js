@@ -136,17 +136,19 @@ const forgotPasswordAction = (data) => (dispatch) => {
 
 const resetPasswordAction = (data) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    axios
-      .put("api/reset-password", data)
-      .then((response) => response.data)
-      .then((response) => {
-        toast.success(response.message);
-        resolve(response);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-        reject(error);
-      });
+    axios.get("sanctum/csrf-cookie").then((response) => {
+      axios
+        .put("api/reset-password", data)
+        .then((response) => response.data)
+        .then((response) => {
+          toast.success(response.message);
+          resolve(response);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+          reject(error);
+        });
+    });
   });
 };
 

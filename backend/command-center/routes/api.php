@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -26,15 +27,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('role', RoleController::class)->except(['store', 'delete']);
         Route::apiResource('permission', PermissionController::class)->except(['store', 'delete']);
         Route::put('role/permission/{id}', [RoleController::class, 'setPermission'])->name('set-permission');
+        Route::apiResource('media', MediaController::class);
     });
 
     Route::put('profile', [AuthController::class, 'profileUpdate'])->name('profile.update');
+    Route::get('user-media', [MediaController::class, 'getMediaByUser'])->name('user.media');
 });
+
 
 Route::middleware('guest')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('forgot-password', [AuthController::class, 'forgetPassword'])->name('password.email');
-    Route::post('reset-password', [AuthController::class, 'ResetPassword'])->name('password.update');
+    Route::put('reset-password', [AuthController::class, 'ResetPassword'])->name('password.update');
     Route::get('login/google', [AuthController::class, 'googleLoginAction'])->name('login.google');
     Route::get('login/google/callback', [AuthController::class, 'googleLoginCallback'])->name('login.google.callback');
 });

@@ -53,4 +53,14 @@ class User extends Authenticatable
         'status' => 'boolean',
         'last_login_at' => 'datetime',
     ];
+
+    /**
+     * Get all of the media for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function medias()
+    {
+        return $this->hasMany(Media::class);
+    }
 }

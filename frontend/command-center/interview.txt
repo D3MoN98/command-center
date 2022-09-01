@@ -1,0 +1,20 @@
+#. What is react? 
+
+React is a javascript library developed by Facebook which can used to creat interactive ui whcih is easy to implement. It uses JSX XML like syntax. It follows component based structure React effieciently update and rerender the right component whenver user data changes.
+
+#. What is JSX?
+
+JSX is a syntax extension of JavaScript. It is used with React to describe what the user interface should look like. By using JSX, we can write HTML structures in the same file that contains JavaScript code.
+
+#. What is Virtual DOM?
+
+React keeps a lightweight representation of the real DOM in the memory, and that is known as the virtual DOM. When the state of an object changes, virtual DOM changes only that object in the real DOM, rather than updating all the objects.
+
+One-way data-binding? React’s one-way data binding keeps everything modular and fast. A unidirectional data flow means that when designing a React app, you often nest child components within parent components.
+
+#. JavaScript require vs import?
+
+import cannot be called conditionally require can be call anywhere in the the program
+
+#. What are the components in React?
+Components are the building blocks of any React application, and a single app usually consists of multiple components. A component is essentially a piece of the user interface. It splits the user interface into independent, reusable parts that can be processed separately.

@@ -108,6 +108,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .form-control:active, .form-control:focus {
   background: #fbfbfb;
   border-color: transparent;
+  border-color: #a2a2a2;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -132,6 +133,10 @@ input[type="number"]::-webkit-outer-spin-button {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   opacity: 0.5;
   /* Firefox */
+}
+
+.form-control.form-control-sm {
+  padding: 0.25rem 0.5rem;
 }
 
 a.link {
@@ -502,5 +507,128 @@ a.link:hover {
 
 .main .card .card-title svg {
   font-size: 14px;
+}
+
+.media-file-upload .preview {
+  width: 128px;
+  height: 128px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: border 0.24s ease-in-out;
+  transition: border 0.24s ease-in-out;
+}
+
+.media-file-upload .preview .btn {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  border: 2px dashed #d7d7d7;
+  color: #bdbdbd;
+}
+
+.media-file-upload .preview .btn.preview-btn {
+  opacity: 0;
+}
+
+.media-file-upload .preview img {
+  position: absolute;
+}
+
+.media-file-upload:hover .preview-btn {
+  opacity: 1;
+}
+
+.dropzone {
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: #eeeeee;
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  -webkit-transition: border 0.24s ease-in-out;
+  transition: border 0.24s ease-in-out;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.dropzone:focus {
+  border-color: #2196f3;
+}
+
+.dropzone.disabled {
+  opacity: 0.6;
+}
+
+.media-library .library-list-otr {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.media-library .media-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.media-library .media-filter * {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 33%;
+          flex: 0 0 33%;
+}
+
+.media-library .library-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.media-library .library-list img {
+  cursor: pointer;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 64px;
+          flex: 0 0 64px;
+  height: 64px;
+  margin: 4px;
+  border-radius: 8px;
+}
+
+.media-library .library-list img.active {
+  border: 5px solid #8973f2;
+}
+
+.modal .modal-content {
+  border-radius: 8px;
 }
 /*# sourceMappingURL=style.css.map */

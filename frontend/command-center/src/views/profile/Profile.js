@@ -5,10 +5,17 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { authActionCreator } from "../../store/auth";
 import FormError from "../components/FormError";
+import MediaUploader from "../components/MediaUploader";
 
 export default function Profile() {
   let authUser = useSelector((state) => state.auth.authUser);
   let dispatch = useDispatch();
+
+  //   const { acceptedFiles, getRootProps, getInputProps, onDrop } = useDropzone();
+
+  //   const files = acceptedFiles.map((file) => {
+  //     console.log(file);
+  //   });
 
   const {
     register,
@@ -40,16 +47,22 @@ export default function Profile() {
     });
   };
 
+  //   const onDrop = (acceptedFiles) => {
+  //     console.log(acceptedFiles);
+  //   };
+
   return (
     <>
       <Row>
         <Col md={12}>
           <Card className="mb-3">
+            <Card.Title>
+              Edit Profile <FontAwesomeIcon icon="fa-solid fa-info" />
+            </Card.Title>
             <Card.Body>
-              <Card.Title>
-                Edit Profile <FontAwesomeIcon icon="fa-solid fa-info" />
-              </Card.Title>
               <Form onSubmit={handleSubmit(profileEdit)}>
+                <MediaUploader />
+                <hr />
                 <Form.Group className="form-group">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
